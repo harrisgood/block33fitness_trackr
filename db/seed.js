@@ -53,14 +53,18 @@ const connectAndSeed = async () => {
   await createTables();
   console.log('tables created')
   
-  await createRoutine(true, 'testDay', 'test out our function')
+  const legDay = await createRoutine(true, 'legDay', 'work out for legs')
   console.log('mock routine created')
 
-  await createActivity('test name', 'test description')
+  const squats = await createActivity('squats', 'barbell on the back and squat down')
+  console.log('mock activity created')
+  const running = await createActivity('running', 'walk twice at once')
   console.log('mock activity created')
 
-  // await createRoutineActivity(1, 2, 1)
-  // console.log('mock routines_activities created')
+  await createRoutineActivity(legDay.id, squats.id, 5)
+  console.log('mock routines_activities created')
+  await createRoutineActivity(legDay.id, running.id, 2)
+  console.log('mock routines_activities created')
 }
 
 connectAndSeed();
