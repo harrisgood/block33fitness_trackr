@@ -11,18 +11,6 @@ const createRoutineActivity = async (RAroutineId, RAactivityId, RoutineActivityC
   }
 }
 
-const getRoutineActivities = async () => {
-  try {
-     const { rows } = await client.query(`
-        SELECT * FROM fitness_trackr;
-     `);
-     return rows;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 module.exports = {
   createRoutineActivity,
-  getRoutineActivities
 }

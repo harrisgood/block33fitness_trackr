@@ -11,17 +11,6 @@ const createRoutine = async (isRoutinePublic, routineName, routineGoal,) => {
   }
 }
 
-const getRoutines = async () => {
-  try {
-     const { rows } = await client.query(`
-        SELECT * FROM fitness_trackr;
-     `);
-     return rows;
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 module.exports = {
   createRoutine,
 }

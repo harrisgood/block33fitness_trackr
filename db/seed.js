@@ -55,12 +55,12 @@ const connectAndSeed = async () => {
   
   await createRoutine(true, 'testDay', 'test out our function')
   console.log('mock routine created')
-  
+
   await createActivity('test name', 'test description')
   console.log('mock activity created')
 
-  await createRoutineActivity(1, 2)
-  console.log('mock routines_activities created')
+  // await createRoutineActivity(1, 2, 1)
+  // console.log('mock routines_activities created')
 }
 
 connectAndSeed();
