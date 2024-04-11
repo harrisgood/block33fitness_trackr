@@ -2,12 +2,10 @@ const client = require('./client')
 
 const createRoutineActivity = async (RAroutineId, RAactivityId, RoutineActivityCount,) => {
   try {
-    const { rows: [ id,  routine_id, activity_id, count ] } = await client.query(`
-      INSERT INTO fitness_trackr (id, is_public, name, goal)
-      VALUES(${RAroutineId}, ${RAactivityId}, ${RoutineActivityCount})
-      RETURNING *;
+    await client.query(`
+      INSERT INTO routines_activities (routineId, activityId, count)
+      VALUES(${RAroutineId}, ${RAactivityId}, ${RoutineActivityCount});
     `);
-    return { id, routine_id, activity_id, count };
   } catch (error) {
     console.log(error)
   }

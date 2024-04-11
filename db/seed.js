@@ -1,7 +1,7 @@
 const client = require('./client')
-const { createRoutine, getRoutines } = require('./routines.js')
-const { createActivity, getActivities } = require('./activities.js')
-const { createRoutineActivity, getRoutineActivities } = require('./routines_activities.js')
+const { createRoutine } = require('./routines.js')
+const { createActivity } = require('./activities.js')
+const { createRoutineActivity } = require('./routines_activities.js')
 
 const createTables = async () => {
   try {
@@ -10,13 +10,13 @@ const createTables = async () => {
         id SERIAL PRIMARY KEY,
         is_public BOOLEAN NOT NULL,
         name VARCHAR(12) NOT NULL,
-        goal VARCHAR(20) NOT NULL
+        goal text NOT NULL
       );
 
       CREATE TABLE activities (
         id SERIAL PRIMARY KEY,
         name VARCHAR(12) NOT NULL,
-        description VARCHAR(30) NOT NULL
+        description text NOT NULL
       );
       
       CREATE TABLE routines_activities (
@@ -54,6 +54,13 @@ const connectAndSeed = async () => {
   console.log('tables created')
   
   await createRoutine(true, 'testDay', 'test out our function')
+  console.log('mock routine created')
+  
+  await createActivity('test name', 'test description')
+  console.log('mock activity created')
+
+  await createRoutineActivity(1, 2)
+  console.log('mock routines_activities created')
 }
 
 connectAndSeed();
