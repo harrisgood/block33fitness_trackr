@@ -3,6 +3,12 @@ const { createRoutine } = require('./routines.js')
 const { createActivity } = require('./activities.js')
 const { createRoutineActivity } = require('./routines_activities.js')
 
+const routine1 = {is_public: true, name: 'Leg Day', description: 'work out for legs'}
+
+const activity1 = {name: 'squats', description: 'barbell on the back and squat down'}
+const activity2 =  {name: 'running', description: 'walk twice at once'}
+
+
 const createTables = async () => {
   try {
     await client.query(`
@@ -53,18 +59,20 @@ const connectAndSeed = async () => {
   await createTables();
   console.log('tables created')
   
-  const legDay = await createRoutine(true, 'legDay', 'work out for legs')
-  console.log('mock routine created')
 
-  const squats = await createActivity('squats', 'barbell on the back and squat down')
-  console.log('mock activity created')
-  const running = await createActivity('running', 'walk twice at once')
-  console.log('mock activity created')
+
+  const legDay = await createRoutine(routine1.is_public, routine1.name, routine1.description,)
+  console.log('leg day created: ', legDay)
+
+  const squats = await createActivity(activity1.name, activity1.description)
+  console.log('squats created:', squats)
+  const running = await createActivity(activity2.name, activity2.description)
+  console.log('running created: ', running)
 
   await createRoutineActivity(legDay.id, squats.id, 5)
-  console.log('mock routines_activities created')
+  console.log('5 squats added to legday')
   await createRoutineActivity(legDay.id, running.id, 2)
-  console.log('mock routines_activities created')
+  console.log('2 running added to legday')
 }
 
 connectAndSeed();
