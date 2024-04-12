@@ -24,7 +24,22 @@ const getRoutines = async () => {
   }
 }
 
+const deleteRoutine = async (IdToDelete) => {
+  try {
+    const { rows: [deleteObject] } = await client.query(`
+      DELETE FROM routines WHERE id = ${IdToDelete}
+      RETURNING *;
+    `)
+    console.log('deleteObject: ', deleteObject)
+    return (deleteObject ? "succesfully deleted" : "failed to delete")
+  } catch (error) {
+    console.log(error)
+    return "failed to delete, because " + error
+  }
+}
+
 module.exports = {
   createRoutine,
-  getRoutines
+  getRoutines,
+  deleteRoutine
 }

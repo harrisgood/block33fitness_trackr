@@ -24,7 +24,21 @@ const getActivities = async () => {
   }
 }
 
+const deleteActivity = async (IdToDelete) => {
+  try {
+    const { rows: [deleteObject] } = await client.query(`
+      DELETE FROM activities WHERE id = ${IdToDelete}
+      RETURNING *;
+    `)
+    return (deleteObject ? "succesfully deleted" : "failed to delete")
+  } catch (error) {
+    console.log(error)
+    return "failed to delete, because " + error
+  }
+}
+
 module.exports = {
   createActivity,
-  getActivities
+  getActivities,
+  deleteActivity
 }
