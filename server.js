@@ -2,7 +2,7 @@ const client = require('./db/client.js');
 const express = require('express')
 const app = express()
 const { createRoutine, getRoutines, deleteRoutine } = require('./db/routines.js')
-const { createRoutineActivity, getRoutineActivities } = require('./db/routines_activities.js')
+const { createRoutineActivity } = require('./db/routines_activities.js')
 const { createActivity, getActivities, deleteActivity } = require('./db/activities.js')
 
 
