@@ -13,6 +13,18 @@ const createActivity = async ( activityName, activityDescription, ) => {
   }
 }
 
+const getActivities = async () => {
+  try {
+     const { rows } = await client.query(`
+        SELECT * FROM activities;
+     `);
+     return rows;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 module.exports = {
   createActivity,
+  getActivities
 }

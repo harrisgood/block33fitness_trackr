@@ -4,8 +4,19 @@ const createRoutineActivity = async (RAroutineId, RAactivityId, RoutineActivityC
   try {
     await client.query(`
       INSERT INTO routines_activities (routineId, activityId, count)
-      VALUES(${RAroutineId}, ${RAactivityId}, ${RoutineActivityCount});
+      VALUES(${RAroutineId}, ${RAactivityId}, ${RoutineActivityCount})
     `);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getRoutineActivities = async () => {
+  try {
+     const { rows } = await client.query(`
+        SELECT * FROM routines_activities;
+     `);
+     return rows;
   } catch (error) {
     console.log(error)
   }
@@ -13,4 +24,5 @@ const createRoutineActivity = async (RAroutineId, RAactivityId, RoutineActivityC
 
 module.exports = {
   createRoutineActivity,
+  getRoutineActivities
 }

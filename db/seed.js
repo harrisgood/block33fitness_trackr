@@ -5,9 +5,9 @@ const { createRoutineActivity } = require('./routines_activities.js')
 
 const routine1 = {is_public: true, name: 'Leg Day', description: 'work out for legs'}
 
-const activity1 = {name: 'squats', description: 'barbell on the back and squat down'}
+const activity1 = {name: 'squats', description: 'barbell on the shoulders and almost sit down'}
 const activity2 =  {name: 'running', description: 'walk twice at once'}
-
+const activity3 = {name: 'sled drags', description: 'drag a weighted sled backwards'}
 
 const createTables = async () => {
   try {
@@ -68,11 +68,15 @@ const connectAndSeed = async () => {
   console.log('squats created:', squats)
   const running = await createActivity(activity2.name, activity2.description)
   console.log('running created: ', running)
+  const sleds = await createActivity(activity3.name, activity3.description)
+  console.log('running created: ', running)
 
   await createRoutineActivity(legDay.id, squats.id, 5)
   console.log('5 squats added to legday')
   await createRoutineActivity(legDay.id, running.id, 2)
   console.log('2 running added to legday')
+  await createRoutineActivity(legDay.id, running.id, 4)
+  console.log('4 sleds added to legday')
 }
 
 connectAndSeed();
